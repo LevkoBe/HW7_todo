@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HW7: ToDo List</title>
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <!-- 
+            Add task -input- -btn-
+            btn del all -- question
+            del complet
+            checkboxes (click for whole task field):
+             - checked
+             - unchecked
+             - doubleclick else
+             task: -[]- img- -task- del btn-
+        -->
+    <main>
+      <div id="header">
+        <div id="addTask">
+          <input type="text" id="addTaskInput" />
+          <button id="addTaskButton">Add task</button>
+        </div>
+        <button id="delCompleted">Delete completed tasks</button>
+        <button id="delAll">Delete all tasks</button>
+      </div>
+      <div id="tasks"></div>
+    </main>
+    <script src="scripts/Task.js"></script>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>
