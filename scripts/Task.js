@@ -1,8 +1,8 @@
 class Task {
   constructor(text = "") {
-    let date = new Date().toLocalTimeString();
-    let value = text;
-    let checked = false;
+    this.date = new Date().toLocaleTimeString();
+    this.value = text;
+    this.checked = false;
   }
 
   markAsDone() {

@@ -1,0 +1,92 @@
+* {
+  font-family: "Young Serif", serif;
+}
+
+/* Reset some default styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* Main container */
+main {
+  background-color: #fff;
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styles */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#addTask {
+  display: flex;
+  align-items: center;
+}
+
+#addTaskInput {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+#addTaskButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#addTaskButton:hover {
+  background-color: #0056b3;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+/* Task styles */
+.taskDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  background-color: #c8c8c8;
+  border-radius: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.dateOfLastChange {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Completed task styles */
+input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: #555;
+}

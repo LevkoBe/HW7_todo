@@ -2,27 +2,18 @@
 <html>
   <head>
     <title>HW7: ToDo List</title>
+    <link href="https://fonts.googleapis.com/css?family=Young+Serif:regular" rel="stylesheet" />
     <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
-    <!-- 
-            Add task -input- -btn-
-            btn del all -- question
-            del complet
-            checkboxes (click for whole task field):
-             - checked
-             - unchecked
-             - doubleclick else
-             task: -[]- img- -task- del btn-
-        -->
     <main>
       <div id="header">
         <div id="addTask">
           <input type="text" id="addTaskInput" />
           <button id="addTaskButton">Add task</button>
         </div>
-        <button id="delCompleted">Delete completed tasks</button>
-        <button id="delAll">Delete all tasks</button>
+        <button class="deleteButton" id="delCompleted">Delete completed tasks</button>
+        <button class="deleteButton" id="delAll">Delete all tasks</button>
       </div>
       <div id="tasks"></div>
     </main>
