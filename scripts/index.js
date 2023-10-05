@@ -13,7 +13,7 @@ document.getElementById("delAll").addEventListener("click", () => {
   }
 });
 
-document.getElementById("addTaskButton").addEventListener("click", () => {
+const getAndAddTask = () => {
   let input = document.getElementById("addTaskInput");
   if (input.value != "") {
     let task = new Task(input.value);
@@ -24,7 +24,9 @@ document.getElementById("addTaskButton").addEventListener("click", () => {
   } else {
     alert("You've not created the task! 🎉");
   }
-});
+}
+
+document.getElementById("addTaskButton").addEventListener("click", getAndAddTask);
 
 const editTask = (taskDiv, task) => {
   let inputField = taskDiv.querySelectorAll("input")[1];
@@ -39,6 +41,15 @@ const editTask = (taskDiv, task) => {
 
   delButton.style.display = "none";
   saveButton.style.display = "block";
+
+  inputField.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      stopEditTask(taskDiv, task);
+    } else if (event.key === "Escape") {
+      spanText.textContent = task.value;
+      stopEditTask(taskDiv, task);
+    }
+  });
 };
 
 const stopEditTask = (taskDiv, task) => {
