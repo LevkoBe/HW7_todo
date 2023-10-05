@@ -25,6 +25,41 @@ document.getElementById("addTaskButton").addEventListener("click", () => {
   }
 });
 
+const editTask = (taskDiv, task) => {
+  let inputField = taskDiv.querySelectorAll("input")[1];
+  let spanText = taskDiv.querySelector("span");
+
+  inputField.style.display = "block";
+  spanText.style.display = "none";
+
+  let buttons = taskDiv.querySelectorAll("button");
+  let delButton = buttons[0];
+  let saveButton = buttons[1];
+
+  delButton.style.display = "none";
+  saveButton.style.display = "block";
+};
+
+const stopEditTask = (taskDiv, task) => {
+  let inputField = taskDiv.querySelectorAll("input")[1];
+  let spanText = taskDiv.querySelector("span");
+
+  task.value = inputField.value;
+  task.date = new Date().toLocaleTimeString();
+
+  inputField.style.display = "none";
+  spanText.style.display = "block";
+
+  let buttons = taskDiv.querySelectorAll("button");
+  let delButton = buttons[0];
+  let saveButton = buttons[1];
+
+  delButton.style.display = "block";
+  saveButton.style.display = "none";
+
+  updateTasks();
+};
+
 const addTask = (task) => {
   let tasksDiv = document.getElementById("tasks");
 
@@ -32,32 +67,48 @@ const addTask = (task) => {
   taskDiv.classList.toggle("taskDiv");
 
   let taskCheckbox = document.createElement("input");
+  let editableDescription = document.createElement("input");
   let taskDescription = document.createElement("span");
   let taskDate = document.createElement("p");
   let delButton = document.createElement("button");
+  let saveButton = document.createElement("button");
 
   taskDescription.textContent = task.value;
+  editableDescription.value = taskDescription.textContent;
+  editableDescription.style.display = "none";
 
   delButton.textContent = "Delete";
   delButton.classList.toggle("deleteButton");
   delButton.addEventListener("click", () => {
     deleteSelf(task);
   });
+  saveButton.textContent = "Save";
+  saveButton.classList.toggle("saveButton");
+  saveButton.addEventListener("click", () => {
+    updateTasks();
+  });
+  saveButton.style.display = "none";
 
   taskDate.classList.toggle("dateOfLastChange");
   taskDate.textContent = task.date;
 
   taskCheckbox.type = "checkbox";
-  taskCheckbox.checked = false;
+  taskCheckbox.checked = task.checked;
   applyCheckStyle(taskCheckbox);
   taskCheckbox.addEventListener("change", () => {
     applyCheckStyle(taskCheckbox);
     task.checked = !task.checked;
   });
 
+  taskDiv.addEventListener("dblclick", () => {
+    editTask(taskDiv, task);
+  });
+
   taskDiv.appendChild(taskCheckbox);
   taskDiv.appendChild(taskDescription);
+  taskDiv.appendChild(editableDescription);
   taskDiv.appendChild(delButton);
+  taskDiv.appendChild(saveButton);
   taskDiv.appendChild(taskDate);
 
   tasksDiv.appendChild(taskDiv);
