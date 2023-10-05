@@ -20,6 +20,7 @@ document.getElementById("addTaskButton").addEventListener("click", () => {
     tasks.push(task);
     input.value = "";
     addTask(task);
+    updateTasks();
   } else {
     alert("You've not created the task! 🎉");
   }
@@ -45,7 +46,7 @@ const stopEditTask = (taskDiv, task) => {
   let spanText = taskDiv.querySelector("span");
 
   task.value = inputField.value;
-  task.date = new Date().toLocaleTimeString();
+  task.date = new Date();
 
   inputField.style.display = "none";
   spanText.style.display = "block";
@@ -85,12 +86,12 @@ const addTask = (task) => {
   saveButton.textContent = "Save";
   saveButton.classList.toggle("saveButton");
   saveButton.addEventListener("click", () => {
-    updateTasks();
+    stopEditTask(taskDiv, task);
   });
   saveButton.style.display = "none";
 
   taskDate.classList.toggle("dateOfLastChange");
-  taskDate.textContent = task.date;
+  taskDate.textContent = task.date.toLocaleTimeString();
 
   taskCheckbox.type = "checkbox";
   taskCheckbox.checked = task.checked;
@@ -125,21 +126,21 @@ const applyCheckStyle = (taskCheckbox) => {
 };
 
 const updateTasks = () => {
-  tasks
-    .sort((a, b) => {
+  tasks.sort((a, b) =>
+  {
       let firstTime = new Date(a.date);
       let secondTime = new Date(b.date);
-      return firstTime - secondTime;
-    })
-    .sort((a, b) => {
+      return secondTime - firstTime;
+  }).sort((a, b) => 
+  {
       if (a.checked && !b.checked) {
-        return -1;
-      }
-      if (!a.checked && b.checked) {
         return 1;
       }
-      return 0;
-    });
+      if (!a.checked && b.checked) {
+        return -1;
+      }
+    return 0;
+  });
   document.getElementById("tasks").innerHTML = "";
   tasks.forEach((tsk) => {
     addTask(tsk);
