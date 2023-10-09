@@ -45,6 +45,10 @@ const editTask = (taskDiv, task) => {
 
   inputField.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
+      if (inputField.value == "") {
+        dontEditTask(taskDiv, task);
+      }
+      else
       stopEditTask(taskDiv, task);
     } else if (event.key === "Escape") {
       dontEditTask(taskDiv, task);
@@ -116,6 +120,10 @@ const addTask = (task) => {
   saveButton.textContent = "Save";
   saveButton.classList.toggle("saveButton");
   saveButton.addEventListener("click", () => {
+    if (editableDescription.value == "") {
+      dontEditTask(taskDiv, task);
+    }
+    else
     stopEditTask(taskDiv, task);
   });
   saveButton.style.display = "none";
