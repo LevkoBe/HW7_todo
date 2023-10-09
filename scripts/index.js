@@ -29,6 +29,7 @@ const getAndAddTask = () => {
 document.getElementById("addTaskButton").addEventListener("click", getAndAddTask);
 
 const editTask = (taskDiv, task) => {
+  task.editing = true;
   let inputField = taskDiv.querySelectorAll("input")[1];
   let spanText = taskDiv.querySelector("span");
 
@@ -46,13 +47,31 @@ const editTask = (taskDiv, task) => {
     if (event.key === "Enter") {
       stopEditTask(taskDiv, task);
     } else if (event.key === "Escape") {
-      spanText.textContent = task.value;
-      stopEditTask(taskDiv, task);
+      dontEditTask(taskDiv, task);
     }
   });
 };
 
+const dontEditTask = (taskDiv, task) => {
+  task.editing = false;
+  let inputField = taskDiv.querySelectorAll("input")[1];
+  let spanText = taskDiv.querySelector("span");
+
+  inputField.value = task.value;
+
+  inputField.style.display = "none";
+  spanText.style.display = "block";
+
+  let buttons = taskDiv.querySelectorAll("button");
+  let delButton = buttons[0];
+  let saveButton = buttons[1];
+
+  delButton.style.display = "block";
+  saveButton.style.display = "none";
+};
+
 const stopEditTask = (taskDiv, task) => {
+  task.editing = false;
   let inputField = taskDiv.querySelectorAll("input")[1];
   let spanText = taskDiv.querySelector("span");
 
@@ -108,12 +127,25 @@ const addTask = (task) => {
   taskCheckbox.checked = task.checked;
   applyCheckStyle(taskCheckbox);
   taskCheckbox.addEventListener("change", () => {
-    applyCheckStyle(taskCheckbox);
     task.checked = !task.checked;
+    updateTasks();
   });
 
-  taskDiv.addEventListener("dblclick", () => {
-    editTask(taskDiv, task);
+  let singleClickTimer;
+  taskDiv.addEventListener("click", () => {
+    if (!task.editing) {
+      if (!singleClickTimer) {
+          singleClickTimer = setTimeout(() => {
+              singleClickTimer = null;
+              task.checked = !task.checked;
+              updateTasks();
+          }, 300);
+      } else {
+          clearTimeout(singleClickTimer);
+          singleClickTimer = null;
+          editTask(taskDiv, task);
+      }
+    }
   });
 
   taskDiv.appendChild(taskCheckbox);
