@@ -216,6 +216,7 @@ const updateTasks = () => {
     return 0;
   });
   document.getElementById("tasks").innerHTML = "";
+  saveTasksToLocalStorage();
   tasks.forEach((tsk) => {
     addTask(tsk);
   });

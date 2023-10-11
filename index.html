@@ -15,6 +15,7 @@
         </div>
         <button class="deleteButton" id="delCompleted">Delete completed tasks</button>
         <button class="deleteButton" id="delAll">Delete all tasks</button>
+        <button class="deleteButton" id="clearStorageButton">Clear storage</button>
         <button id="sortButton">Change sorting</button>
       </div>
       <div id="tasks"></div>
@@ -24,6 +25,7 @@
     <script src="scripts/index.js"></script>
     <script src="scripts/allicons.js"></script>
     <script src="scripts/icons.js"></script>
+    <script src="scripts/storagehandling.js"></script>
     <script>
       document.getElementById("addTaskInput").addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
