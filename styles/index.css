@@ -78,6 +78,10 @@ button {
   border-radius: 10px;
 }
 
+.active {
+  background-color: #93c5bf;
+}
+
 input[type="checkbox"] {
   margin-right: 10px;
 }
