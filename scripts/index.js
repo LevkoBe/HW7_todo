@@ -12,6 +12,23 @@ document.getElementById("delAll").addEventListener("click", () => {
     updateTasks();
   }
 });
+let function1 = (a, b) => {
+  let firstTime = new Date(a.date);
+  let secondTime = new Date(b.date);
+  return secondTime - firstTime;
+};
+let function2 = (a, b) => {
+  let firstTime = new Date(a.date);
+  let secondTime = new Date(b.date);
+  return firstTime - secondTime;
+};
+let sortFunction = function1;
+document.getElementById("sortButton").addEventListener("click", () => {
+  if (sortFunction === function1) {
+    sortFunction = function2;
+  } else sortFunction = function1;
+  updateTasks();
+});
 
 const getAndAddTask = () => {
   let input = document.getElementById("addTaskInput");
@@ -188,12 +205,7 @@ const applyCheckStyle = (taskCheckbox) => {
 };
 
 const updateTasks = () => {
-  tasks.sort((a, b) =>
-  {
-      let firstTime = new Date(a.date);
-      let secondTime = new Date(b.date);
-      return secondTime - firstTime;
-  }).sort((a, b) => 
+  tasks.sort(sortFunction).sort((a, b) => 
   {
       if (a.checked && !b.checked) {
         return 1;
