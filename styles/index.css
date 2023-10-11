@@ -90,3 +90,29 @@ input[type="checkbox"]:checked + span {
   text-decoration: line-through;
   color: #555;
 }
+
+/* Pop-up */
+#iconPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  max-height: 400px;
+  background-color: #fff;
+  border: 14px double #ccc;
+  border-radius: 15px;
+  overflow-y: auto;
+}
+
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+i {
+  padding: 3px;
+}

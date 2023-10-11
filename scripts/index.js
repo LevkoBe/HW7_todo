@@ -16,7 +16,7 @@ document.getElementById("delAll").addEventListener("click", () => {
 const getAndAddTask = () => {
   let input = document.getElementById("addTaskInput");
   if (input.value != "") {
-    let task = new Task(input.value);
+    let task = new TaskPremium(input.value);
     tasks.push(task);
     input.value = "";
     addTask(task);
@@ -108,6 +108,14 @@ const addTask = (task) => {
   let delButton = document.createElement("button");
   let saveButton = document.createElement("button");
 
+  let iconSpan = document.createElement("span");
+  iconSpan.innerHTML = `<i class="fas ${task.iconClass}"></i>`;
+  iconSpan.addEventListener("click", () => {
+    displayIcons();
+    iconSpan.classList.add("choosing");
+    iconPopup.style.display = "block";
+  });
+
   taskDescription.textContent = task.value;
   editableDescription.value = taskDescription.textContent;
   editableDescription.style.display = "none";
@@ -122,9 +130,9 @@ const addTask = (task) => {
   saveButton.addEventListener("click", () => {
     if (editableDescription.value == "") {
       dontEditTask(taskDiv, task);
+    } else {
+      stopEditTask(taskDiv, task);
     }
-    else
-    stopEditTask(taskDiv, task);
   });
   saveButton.style.display = "none";
 
@@ -141,21 +149,22 @@ const addTask = (task) => {
 
   let singleClickTimer;
   taskDiv.addEventListener("click", () => {
-    if (!task.editing) {
+    if (!task.editing && !document.querySelector(".choosing")) {
       if (!singleClickTimer) {
-          singleClickTimer = setTimeout(() => {
-              singleClickTimer = null;
-              task.checked = !task.checked;
-              updateTasks();
-          }, 300);
-      } else {
-          clearTimeout(singleClickTimer);
+        singleClickTimer = setTimeout(() => {
           singleClickTimer = null;
-          editTask(taskDiv, task);
+          task.checked = !task.checked;
+          updateTasks();
+        }, 300);
+      } else {
+        clearTimeout(singleClickTimer);
+        singleClickTimer = null;
+        editTask(taskDiv, task);
       }
     }
   });
 
+  taskDiv.appendChild(iconSpan);
   taskDiv.appendChild(taskCheckbox);
   taskDiv.appendChild(taskDescription);
   taskDiv.appendChild(editableDescription);
@@ -164,7 +173,9 @@ const addTask = (task) => {
   taskDiv.appendChild(taskDate);
 
   tasksDiv.appendChild(taskDiv);
+  task.myDiv = taskDiv;
 };
+
 
 const applyCheckStyle = (taskCheckbox) => {
   if (taskCheckbox.checked) {

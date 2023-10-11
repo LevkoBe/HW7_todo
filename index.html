@@ -3,6 +3,7 @@
   <head>
     <title>HW7: ToDo List</title>
     <link href="https://fonts.googleapis.com/css?family=Young+Serif:regular" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
@@ -17,8 +18,11 @@
       </div>
       <div id="tasks"></div>
     </main>
+    <div id="iconPopup" class="icon-container"></div>
     <script src="scripts/Task.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/allicons.js"></script>
+    <script src="scripts/icons.js"></script>
     <script>
       document.getElementById("addTaskInput").addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
